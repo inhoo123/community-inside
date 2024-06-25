@@ -8,7 +8,7 @@ import model.vo.User;
 import oracle.jdbc.datasource.impl.OracleDataSource;
 
 public class UserDao {
-
+//===========================회원가입=================================================================
 	public boolean save(User newUser) throws Exception {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -33,7 +33,7 @@ public class UserDao {
 		}
 
 	  }
-	
+//=====================유저찾기=================================================================================	
 	public User findById(String id) throws Exception {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
