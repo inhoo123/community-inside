@@ -17,7 +17,7 @@ public class UserDao {
 
 		try (Connection conn = ods.getConnection()) {
 
-			PreparedStatement stmt = conn.prepareStatement("INSERT INTO USERS VALUES(?,?,?,?,?)");
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO USERS VALUES(?,?,?,?,?,?)");
 			stmt.setString(1, newUser.getId());
 			stmt.setString(2, newUser.getPassword());
 			stmt.setDate(3, newUser.getRegisterAt());
