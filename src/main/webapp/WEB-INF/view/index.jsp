@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>COMMUNITY-INSIDE</title>
+
+<title>인사이드</title>
 </head>
 <body>
-<p>INDEX</p>
-<b>왜화면이 안찍히지</b>
+ 	<h1>인사이드</h1>
+ 
 
 </body>
 </html>
