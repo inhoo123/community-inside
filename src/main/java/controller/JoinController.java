@@ -8,20 +8,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/login-handle")
-public class LoginHandleController extends HttpServlet{
+@WebServlet("/join")
+public class JoinController extends HttpServlet{
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		
-		try {
-			
-			
-		}catch(Exception e) {
-			System.out.println(e);
-			request.getRequestDispatcher("/WEB-INF/view/login-error.jsp").forward(request, response);
-		}
-		}
+		request.getRequestDispatcher("/WEB-INF/view/join.jsp").forward(request, response);
 	}
-
+}
