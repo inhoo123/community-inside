@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Index</title>
+<title>인사이드</title>
 </head>
 <body>
- HEALTH CHECK
+ 	<h1>인사이드</h1>
+ 
+ 
 </body>
 </html>
