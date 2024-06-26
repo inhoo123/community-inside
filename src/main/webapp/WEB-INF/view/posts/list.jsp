@@ -12,16 +12,15 @@
 </head>
 <body>
 
-
-	
-
 	<%@ include file="/WEB-INF/view/common/header.jsp"%>
 	<div class="container px-1"></div>
 	<div class="container px-1">
 		<div style="text-align: center;">
 			<h2>갤러리</h2>
 			<div style="margin-top: 10px; text-align: right;">
-				<a href="${pageContext.servletContext.contextPath }/posts/write">
+
+				<a href="${pageContext.servletContext.contextPath }/write">
+
 					<button>글쓰기</button>
 				</a>
 
@@ -35,20 +34,27 @@
 						<th style="width: 15%">작성일</th>
 						<th style="width: 10%">조회</th>
 						<th style="width: 10%">추천</th>
+
 					</tr>
 				</thead>
 				<tbody>
 					<div>
 						<c:forEach items="${post}" var="one">
 							<tr style="border-bottom: 1px solid #ddd; height: 30px;">
-								<td class="text-center">${one.no }</td>
+
+
 								<td><a
 									href="${pageContext.servletContext.contextPath }/posts/view?no=${one.no}"
-									class="no-deco-link"> ${one.title} </a></td>
-								<td class="text-center">${one.title}</td>
+									class="no-deco-link">${one.no } </a></td>
+								<td><a
+									href="${pageContext.servletContext.contextPath }/posts/view?no=${one.no}"
+									class="no-deco-link">${one.title } </a></td>
+								<td class="text-center">${one.writerId}</td>
 								<td class="text-center">${one.writedAt}</td>
 								<td class="text-center">${one.viewCount}</td>
 								<td class="text-center">${one.likes}</td>
+								<td class="text-center">${one.dislikes}</td>
+
 							</tr>
 						</c:forEach>
 					</div>
