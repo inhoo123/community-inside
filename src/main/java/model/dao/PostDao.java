@@ -178,4 +178,29 @@ public class PostDao {
 			return null;
 		}
 	}
+
+	
+	public int countAll() throws SQLException {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+		try (Connection conn = ods.getConnection()) {
+
+			PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM POSTS");
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt("count(*)");
+				return cnt;
+			} else {
+				return -1;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+
 }

@@ -23,11 +23,8 @@ public class IndexController extends HttpServlet {
 //			Post categorys = (Post) postDao.findByCategroyPosts(category);
 //			request.setAttribute("categorys", categorys);
 			// =======================================================================
-			if (request.getSession().getAttribute("authUser") == null) {
 				request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
-			} else {
-				request.getRequestDispatcher("/WEB-INF/view/index-logon.jsp").forward(request, response);
-			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
