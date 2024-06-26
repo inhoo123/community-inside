@@ -32,17 +32,10 @@
 			style="border: 1px solid black; padding: 5px; width: 150px; background-color: white; border-radius: 32px;" />
 		</a>
 		<div >
-			<c:choose>
-				<c:when test="${empty param.q }">
-					<form action="${pageContext.servletContext.contextPath }/search">
+					<form action="${pageContext.servletContext.contextPath }/search/view">
 						<input class="search" type="text" placeholder="갤러리 & 통합검색" name="q"
-							style="width: 300px;" />
+							style="width: 300px;" value="${param.q }" />
 					</form>
-				</c:when>
-				<c:otherwise>
-					<input type="text" style="width: 1500px;" value="${param.q }" />
-				</c:otherwise>
-			</c:choose>
 		</div>
 
 
@@ -50,7 +43,7 @@
 </div>
 <!-- 네비게이션 -->
 <div class="gnb_bar">
-	<a href="${pageContext.servletContext.contextPath }/posts/list"
+	<a href="${pageContext.servletContext.contextPath }/list"
 		>갤러리 <small></small></a>
 </div>
 

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import model.vo.Post;
 import oracle.jdbc.datasource.impl.OracleDataSource;
 
@@ -20,8 +21,9 @@ public class PostDao {
 
 		try (Connection conn = ods.getConnection()) {
 
-			PreparedStatement stmt = conn.prepareStatement("INSERT INTO POSTS VALUES(POST_SEQ.NEXTVAL,?,?,?,?,?,?,?,?)");
-			
+			PreparedStatement stmt = conn
+					.prepareStatement("INSERT INTO POSTS VALUES(POST_SEQ.NEXTVAL,?,?,?,?,?,?,?,?)");
+
 			stmt.setString(1, newPost.getCategory());
 			stmt.setString(2, newPost.getTitle());
 			stmt.setString(3, newPost.getBody());
@@ -40,7 +42,7 @@ public class PostDao {
 
 	}
 //========================삭제================================================================================================
-	
+
 	public boolean deleteByNo(int no) throws SQLException {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -61,7 +63,8 @@ public class PostDao {
 		}
 
 	}
-	//=========================================================
+
+	// =========================================================
 	public Post findByNo(int no) throws SQLException {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -73,22 +76,23 @@ public class PostDao {
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE NO=?");
 			stmt.setInt(1, no);
 
-			
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
-				
-				return new Post(rs.getInt("no"), rs.getString("category"), rs.getString("title"),
-						rs.getString("body"), rs.getString("writer_id"), rs.getDate("writed_at"),rs.getInt("view_count"),rs.getInt("likes"),rs.getInt("dislikes"));
-			}else {
+			if (rs.next()) {
+
+				return new Post(rs.getInt("no"), rs.getString("category"), rs.getString("title"), rs.getString("body"),
+						rs.getString("writer_id"), rs.getDate("writed_at"), rs.getInt("view_count"), rs.getInt("likes"),
+						rs.getInt("dislikes"));
+			} else {
 				return null;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 
 	}
+
 //====================================전부찾기============================================================
 	public List<Post> findAll() throws Exception {
 		OracleDataSource ods = new OracleDataSource();
@@ -104,7 +108,8 @@ public class PostDao {
 			while (rs.next()) {
 				// rs.getString("writer_id");
 				Post one = new Post(rs.getInt("no"), rs.getString("category"), rs.getString("title"),
-						rs.getString("body"), rs.getString("writer_id"), rs.getDate("writed_at"),rs.getInt("view_count"),rs.getInt("likes"),rs.getInt("dislikes"));
+						rs.getString("body"), rs.getString("writer_id"), rs.getDate("writed_at"),
+						rs.getInt("view_count"), rs.getInt("likes"), rs.getInt("dislikes"));
 				posts.add(one);
 			}
 
@@ -113,8 +118,8 @@ public class PostDao {
 			e.printStackTrace();
 			return null;
 		}
-	}	
-	
+	}
+
 //=====================카테고리============================================	
 	public List<Post> findByCategroyPosts(String category) throws Exception {
 		OracleDataSource ods = new OracleDataSource();
@@ -132,7 +137,8 @@ public class PostDao {
 			while (rs.next()) {
 				// rs.getString("writer_id");
 				Post one = new Post(rs.getInt("no"), rs.getString("category"), rs.getString("title"),
-						rs.getString("body"), rs.getString("writer_id"), rs.getDate("writed_at"),rs.getInt("view_count"),rs.getInt("likes"),rs.getInt("dislikes"));
+						rs.getString("body"), rs.getString("writer_id"), rs.getDate("writed_at"),
+						rs.getInt("view_count"), rs.getInt("likes"), rs.getInt("dislikes"));
 				posts.add(one);
 			}
 
@@ -142,5 +148,34 @@ public class PostDao {
 			return null;
 		}
 	}
-	
+
+//======================SEARCH=================================================
+	public List<Post> findByTitleLikeOrBodysLike(String pattern) throws SQLException {
+
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+		try (Connection conn = ods.getConnection()) {
+
+			PreparedStatement stmt = conn
+					.prepareStatement("SELECT * FROM POSTS WHERE TITLE LIKE ? OR BODY LIKE ? ORDER BY WRITED_AT ASC");
+			stmt.setString(1, "%" + pattern + "%");
+			stmt.setString(2, "%" + pattern + "%");
+			ResultSet rs = stmt.executeQuery();
+			List<Post> posts = new ArrayList<>();
+			while (rs.next()) {
+				// rs.getString("writer_id");
+				Post one = new Post(rs.getInt("no"), rs.getString("category"), rs.getString("title"),
+						rs.getString("body"), rs.getString("writer_id"), rs.getDate("writed_at"),
+						rs.getInt("view_count"), rs.getInt("likes"), rs.getInt("dislikes"));
+				posts.add(one);
+			}
+
+			return posts;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
