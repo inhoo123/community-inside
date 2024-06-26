@@ -43,7 +43,7 @@
 							<tr style="border-bottom: 1px solid #ddd; height: 30px;">
 								<td class="text-center">${one.no }</td>
 								<td><a
-									href="${pageContext.servletContext.contextPath }/posts/view?p=${one.no}"
+									href="${pageContext.servletContext.contextPath }/posts/view?no=${one.no}"
 									class="no-deco-link"> ${one.title} </a></td>
 								<td class="text-center">${one.title}</td>
 								<td class="text-center">${one.writedAt}</td>
