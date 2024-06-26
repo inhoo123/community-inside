@@ -17,13 +17,14 @@ public class PostViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			User authUser = (User) req.getSession().getAttribute("authUser");
-		int no = Integer.parseInt(req.getParameter("no"));
-          PostDao postDao = new PostDao();
-          Post post = postDao.findByNo(no);
-          req.setAttribute("post",post);
-		
-          req.getRequestDispatcher("/WEB-INF/view/posts/view.jsp").forward(req, resp);
+
+			int no = Integer.parseInt(req.getParameter("no"));
+			PostDao postDao = new PostDao();
+			Post post = postDao.findByNo(no);
+			req.setAttribute("post", post);
+
+			req.getRequestDispatcher("/WEB-INF/view/posts/view.jsp").forward(req, resp);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

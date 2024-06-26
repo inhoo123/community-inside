@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,10 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/style.css?<%=System.currentTimeMillis() %>" />
 </head>
+<link rel="stylesheet"
+	href="${pageContext.servletContext.contextPath }/css/style.css?<%=System.currentTimeMillis() %>" />
 <body>
+
 <%@ include file="/WEB-INF/view/common/header.jsp"%>
 <div>
 		<div class="container px-1">
@@ -53,5 +58,6 @@
 	</c:choose>
 		</div>
 		</div>
+
 </body>
 </html>
