@@ -18,7 +18,7 @@
 <div
 			style="width: 400px; margin: 60px auto; border: 1px solid #ddd; padding: 30px;">
 			<form
-				action="${pageContext.servletContext.contextPath }/login-handle">
+				action="${pageContext.servletContext.contextPath }/login-handle" method="post">
 				<p>
 					<input type="text" class="login-input" placeholder="아이디를 입력해주세요" name="id"/>
 				</p>

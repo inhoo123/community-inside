@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>view</title>
 </head>
 <body>
-
+<h2>${post.title }</h2>
+<p>
+${post.body }
+</p>
 </body>
 </html>

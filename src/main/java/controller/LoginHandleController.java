@@ -16,15 +16,13 @@ public class LoginHandleController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		
 		try {
 			UserDao userDao = new UserDao();
 			User user = userDao.findById(id); 
 			if(user == null || ! user.getPassword().equals(password)) {
 				request.getRequestDispatcher("/WEB-INF/view/login-error.jsp").forward(request, response);
 			} else {
-				request.getSession().setAttribute("authUser", user);
-				request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
+        repsonse.sendRedirect(request.getContextPath()+"/index");
 			}
 			
 			

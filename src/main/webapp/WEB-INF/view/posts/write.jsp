@@ -12,8 +12,7 @@
 		<h1 style="font-weight: bold">게시글쓰기</h1>
 		<div>
 			<form
-				action="${pageContext.servletContext.contextPath }/write-handle"
-				method="post">
+				action="${pageContext.servletContext.contextPath }/write-handle" method="post">
 				<table style="border-collapse: collapse; width: 100%">
 					<tr style="border:1px solid #ccc; width: 100%">
 						<td ><select name="category"

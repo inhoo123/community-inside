@@ -7,11 +7,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-@WebServlet("/write")
-public class WriteController extends HttpServlet{
+import model.dao.PostDao;
+
+@WebServlet("/list")
+public class PostListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		request.getRequestDispatcher("/WEB-INF/view/posts/write.jsp").forward(request, response);
+		
+		try {
+			PostDao postDao = new PostDao();
+			request.setAttribute("post", postDao.findAll());
+			request.getRequestDispatcher("/WEB-INF/view/posts/list.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
