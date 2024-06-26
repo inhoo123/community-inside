@@ -12,6 +12,12 @@
 h1, h2, h3, h4, h5, h6 {
 	font-weight: lighter;
 }
+
+.top{
+	padding-top:100px;
+	
+}
+
 .aa{
     font-size: 12px;
     font-family: -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","맑은 고딕",arial,Dotum,돋움,sans-serif;

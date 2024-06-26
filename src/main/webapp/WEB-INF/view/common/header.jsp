@@ -24,12 +24,12 @@
 		</c:choose>
 	</div>
 	<!-- logo & searchbar -->
-	<div class="center"
-		style="display: flex; align-items: center; gap: 20px;">
+	<div
+		style="display: flex;  gap: 20px;">
 
 		<a href="${pageContext.servletContext.contextPath }/index"> <img
 			src="${pageContext.servletContext.contextPath }/image/inside.png"
-			style="border: 1px solid black; padding: 5px; width: 150px; background-color: white; border-radius: 32px;" />
+			style="border: 1px solid black; padding: 7px; width: 150px; background-color: white; border-radius: 32px;" />
 		</a>
 		<div >
 					<form action="${pageContext.servletContext.contextPath }/search/view">
@@ -43,7 +43,11 @@
 </div>
 <!-- 네비게이션 -->
 <div class="gnb_bar">
+<div class="container px-1">
+<div style="text-align: left;">
 	<a href="${pageContext.servletContext.contextPath }/list"
-		>갤러리 <small></small></a>
+		><span style="color:white;  font-weight: 550;">갤러리</span></a>
+		</div>
+		</div>
 </div>
 

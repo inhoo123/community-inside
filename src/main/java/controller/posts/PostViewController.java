@@ -9,17 +9,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.PostDao;
 import model.vo.Post;
+import model.vo.User;
 
-@WebServlet("/posts/view/*")
+@WebServlet("/posts/view")
 public class PostViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-          String uri = req.getRequestURI();
-          int id = Integer.parseInt(uri.substring(uri.lastIndexOf("/") + 1));
+			User authUser = (User) req.getSession().getAttribute("authUser");
+		int no = Integer.parseInt(req.getParameter("no"));
           PostDao postDao = new PostDao();
-          Post post = postDao.findByNo(id);
+          Post post = postDao.findByNo(no);
           req.setAttribute("post",post);
 		
           req.getRequestDispatcher("/WEB-INF/view/posts/view.jsp").forward(req, resp);
