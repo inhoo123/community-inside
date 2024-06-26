@@ -22,8 +22,7 @@ public class LoginHandleController extends HttpServlet{
 			if(user == null || ! user.getPassword().equals(password)) {
 				request.getRequestDispatcher("/WEB-INF/view/login-error.jsp").forward(request, response);
 			} else {
-				request.getSession().setAttribute("authUser", user);
-				request.getRequestDispatcher("/WEB-INF/view/index-logon.jsp").forward(request, response);
+        repsonse.sendRedirect(request.getContextPath()+"/index");
 			}
 			
 			

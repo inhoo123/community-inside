@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>인사이드</title>
+<link rel="stylesheet"
+	href="${pageContext.servletContext.contextPath }/css/style.css?<%=System.currentTimeMillis() %>" />
 </head>
 <body>
- 	<h1>인사이드</h1>
- 
-
+	<%@ include file="/WEB-INF/view/common/header.jsp"%>
+	<div class="container px-1"></div>
 </body>
 </html>
