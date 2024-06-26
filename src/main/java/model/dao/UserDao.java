@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Random;
 
 import model.vo.User;
 import oracle.jdbc.datasource.impl.OracleDataSource;
@@ -60,4 +61,5 @@ public class UserDao {
 			return null;
 		}
 	}
+
 }

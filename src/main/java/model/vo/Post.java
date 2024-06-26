@@ -102,4 +102,12 @@ public class Post {
 	public void setDislikes(int dislikes) {
 		this.dislikes = dislikes;
 	}
+
+	@Override
+	public String toString() {
+		return "Post [no=" + no + ", category=" + category + ", title=" + title + ", body=" + body + ", writerId="
+				+ writerId + ", writedAt=" + writedAt + ", viewCount=" + viewCount + ", likes=" + likes + ", dislikes="
+				+ dislikes + "]";
+	}
+
 }

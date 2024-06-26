@@ -13,11 +13,11 @@ import model.vo.Post;
 import model.vo.User;
 
 @WebServlet("/write-handle")
-public class WriteHandleController extends HttpServlet {
+public class PostWriteHandleController extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		User authUser = (User) request.getSession().getAttribute("authUser");
 		try {
 			String category = request.getParameter("category");
@@ -26,14 +26,18 @@ public class WriteHandleController extends HttpServlet {
 			String writerId = authUser.getId();
 			PostDao postDao = new PostDao();
 			Post one = new Post(0, category, title, body, writerId, new Date(System.currentTimeMillis()), 0, 0, 0);
+			System.out.println(one);
+			
+			
 			boolean r = postDao.save(one);
-
+			
 			if (r) {
-				request.getRequestDispatcher("/WEB-INF/view/feeds/list.jsp").forward(request, response);
+				
+				request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 			}
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 }
