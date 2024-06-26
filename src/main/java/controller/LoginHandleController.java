@@ -22,7 +22,7 @@ public class LoginHandleController extends HttpServlet{
 			if(user == null || ! user.getPassword().equals(password)) {
 				request.getRequestDispatcher("/WEB-INF/view/login-error.jsp").forward(request, response);
 			} else {
-        repsonse.sendRedirect(request.getContextPath()+"/index");
+				response.sendRedirect(request.getContextPath()+"/index");
 			}
 			
 			
