@@ -25,9 +25,10 @@ public class PostViewController extends HttpServlet {
 			PostDao postDao = new PostDao();
 			Post post = postDao.findByNo(no);
 			req.setAttribute("post", post);
-            
+			
 			CommentDao commentDao = new CommentDao();
-			List<Comment> comments  = commentDao.findAllByPostNo(no);
+			List<Comment> comments   =  commentDao.findAllByPostNo(no);
+			req.setAttribute("comments", comments);
 			
 			req.getRequestDispatcher("/WEB-INF/view/posts/view.jsp").forward(req, resp);
 

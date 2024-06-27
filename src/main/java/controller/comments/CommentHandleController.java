@@ -19,9 +19,9 @@ public class CommentHandleController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		User authUser = (User) request.getSession().getAttribute("authUser");
 		try {
-            
 			String body = request.getParameter("body");
 			String password = request.getParameter("password");
 			int postNo = Integer.parseInt(request.getParameter("postNo"));
