@@ -30,8 +30,10 @@
 					<button type="submit" class="login-input">로그인</button>
 				</p>
 			</form>
+		 <p>COMMUNITY-INSIDE 계정없으시다면</p>
+		 <a style="color: RED" href="${pageContext.servletContext.contextPath }/join">가입하기</a>
 		</div>
-
+		<a href="${pageContext.servletContext.contextPath }/index">로그인없이 이용하기</a>
 	</div>
 </body>
 </html>

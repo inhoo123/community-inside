@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import model.vo.Post;
 import oracle.jdbc.datasource.impl.OracleDataSource;
 
@@ -64,7 +63,7 @@ public class PostDao {
 
 	}
 
-	// =========================================================
+	// =====================찾기===============================================================================================
 	public Post findByNo(int no) throws SQLException {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -128,7 +127,7 @@ public class PostDao {
 		ods.setPassword("oracle");
 		try (Connection conn = ods.getConnection()) {
 			// 식별키로 조회하고,
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=? ORDER BY CATEGORY");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=?");
 
 			stmt.setString(1, category);
 
@@ -179,7 +178,7 @@ public class PostDao {
 		}
 	}
 
-	
+//===============================게시글세기======================================================================================	
 	public int countAll() throws SQLException {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -201,6 +200,29 @@ public class PostDao {
 			return -1;
 		}
 	}
-	
 
+//========================조회수======================================================================================================
+	public boolean increaseViewCountByNo(int no) throws SQLException {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+		try (Connection conn = ods.getConnection()) {
+			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET VIEW_COUNT = VIEW_COUNT + 1 WHERE no= ?");
+			stmt.setInt(1, no);
+
+			int r = stmt.executeUpdate();
+
+			return r == 1 ? true : false;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+//==================좋아요===========================================================================================================
+
+	
+//=================좋아요 감소=============================================================================
 }

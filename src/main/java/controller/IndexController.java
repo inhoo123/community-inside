@@ -17,15 +17,7 @@ public class IndexController extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			// =======================카테고리=======================================
-
-//			PostDao postDao = new PostDao();
-//			Post categorys = (Post) postDao.findByCategroyPosts(category);
-//			request.setAttribute("categorys", categorys);
-			// =======================================================================
-				request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
-			
-
+			request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

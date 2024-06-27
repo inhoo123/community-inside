@@ -40,7 +40,7 @@
 				</thead>
 				<tbody>
 					<div>
-						<c:forEach items="${post}" var="one" >
+						<c:forEach items="${posts}" var="one">
 							<tr style="border-bottom: 1px solid #ddd; height: 30px;">
 
 
@@ -70,7 +70,7 @@
 						</c:when>
 						<c:otherwise>
 							<a
-								href="${pageContext.servletContext.contextPath }/list?p=${i}">${i }</a>
+								href="${pageContext.servletContext.contextPath }/sports?p=${i}">${i }</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
