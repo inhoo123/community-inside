@@ -70,12 +70,13 @@
 						</c:when>
 						<c:otherwise>
 							<a
-								href="${pageContext.servletContext.contextPath }/sports?p=${i}">${i }</a>
+								href="${pageContext.servletContext.contextPath }/list/category?category=${category }&p=${i}">${i }</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 			</div>
-
+	
+		
 		</div>
 	</div>
 

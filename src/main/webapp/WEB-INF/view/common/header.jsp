@@ -14,10 +14,9 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div>
-					<a href="${pageContext.servletContext.contextPath }/login"
-						> ${sessionScope.authUser.name }님 </a> <a
-						href="${pageContext.servletContext.contextPath }/login"
+				<div>	
+						 ${sessionScope.authUser.name }님 <a
+						href="${pageContext.servletContext.contextPath }/logout"
 						> 로그아웃</a>
 				</div>
 			</c:otherwise>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,49 +42,68 @@
 					class="no-deco-link"><button>목록</button></a>
 			</div>
 			<p></p>
-		<div style="text-align: right;">
+			<div style="text-align: right;">
 
-			<c:choose>
-				<c:when
-					test="${post.writerId != null &&	post.writerId eq sessionScope.authUser.id }">
-					<a
-						href="${pageContext.servletContext.contextPath}/delete-handle?no=${post.no}"
-						class="no-deco-link">
-						<button>삭제</button>
-					</a>
-					<a
-						href="${pageContext.servletContext.contextPath}/update"
-						class="no-deco-link">
-						<button>수정</button>
-					</a>
-				</c:when>
-			</c:choose>
-		</div>
-		<p>전체 댓글</p>
-		<hr width="100%" color="#3b4890" size="3">
-		<div>
-			<c:forEach items="${comments }" var="one">
-				(${one.writerId})${one.body }
-			</c:forEach>
-		</div>
-		<div class="comment-section">
-			<form
-				action="${pageContext.servletContext.contextPath}/submit-comment?postNo=${post.no}"
-				method="post">
-				<input type="hidden" name="postNo" value="${post.no }"/>
-				<p style="border: 1px solid #ccc; padding: 12px;">
-					<input name="password" type="password"
-						style="padding: 6px 10px; width: 100px; border: 1px solid #ccc"
-						placeholder="비밀번호" required />
-				</p>
-				<textarea style="padding: 6px 10px; height: 200px; width: 300px;"
-					name="body"  placeholder="내용을 입력하세요" required></textarea>
+				<c:choose>
+					<c:when
+						test="${post.writerId != null &&	post.writerId eq sessionScope.authUser.id }">
+						<a
+							href="${pageContext.servletContext.contextPath}/delete-handle?no=${post.no}"
+							class="no-deco-link">
+							<button>삭제</button>
+						</a>
+						<a href="${pageContext.servletContext.contextPath}/update"
+							class="no-deco-link">
+							<button>수정</button>
+						</a>
+					</c:when>
+				</c:choose>
+			</div>
+			<p>전체 댓글</p>
+			<hr width="100%" color="#3b4890" size="3">
+			<div>
+				<c:forEach items="${comments }" var="one">
+					<div
+						style="border-top: 1px solid #eee; border-bottom: 1px solid #eee; display: flex; padding: 4px 0px;">
+						<div style="flex:2; color: #777">${one.writerId}</div>
+						<div style="flex:8">${one.body }</div>
+						<div style="flex:2;  color: #999; font-size: small; text-align: right;"><fmt:formatDate value="${one.writedAt }" pattern="MM.dd HH:mm:ss"/> </div>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="comment-section">
+				<form style="border: 1px solid #ccc; padding: 12px;"
+					action="${pageContext.servletContext.contextPath}/submit-comment"
+					method="post">
+					<input type="hidden" name="postNo" value="${post.no }" />
+					<div style="display: flex; gap: 10px;">
+						<div>
+						<c:choose>
+						<c:when test="${authUser == null }">
+							<input name="password" type="password"
+								style="padding: 6px 10px; width: 100px; border: 1px solid #ccc"
+								placeholder="비밀번호" required />
+								</c:when>
+								<c:otherwise>
+								${post.writerId}
+								</c:otherwise>
+								</c:choose>
+						</div>
+						<div style="flex: 1">
+							<textarea
+								style="padding: 6px 10px; height: 100px; width: 100%; border: 1px solid #ccc; resize: none"
+								name="body" placeholder="내용을 입력하세요" required></textarea>
+						</div>
+					</div>
+					<div style="text-align: right">
 
-				<button type="submit">보내기</button>
-			</form>
+						<button type="submit"
+							style="padding: 8px; background-color: #3b4890; color: white; cursor: pointer; width: 100px;">보내기</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-		</div>
 
 </body>
 </html>

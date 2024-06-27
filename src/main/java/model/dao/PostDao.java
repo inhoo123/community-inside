@@ -127,7 +127,7 @@ public class PostDao {
 		ods.setPassword("oracle");
 		try (Connection conn = ods.getConnection()) {
 			// 식별키로 조회하고,
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=?");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=? ORDER BY WRITED_AT DESC");
 
 			stmt.setString(1, category);
 
@@ -266,7 +266,7 @@ public class PostDao {
 		ods.setUser("community_inside");
 		ods.setPassword("oracle");
 		try (Connection conn = ods.getConnection()) {
-			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET VIEW_COUNT = VIEW_COUNT + 1 WHERE no= ?");
+			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET VIEW_COUNT = VIEW_COUNT + 1 WHERE NO= ?");
 			stmt.setInt(1, no);
 
 			int r = stmt.executeUpdate();
