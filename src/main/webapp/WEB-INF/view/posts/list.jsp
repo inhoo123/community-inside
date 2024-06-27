@@ -54,7 +54,7 @@
 								<td class="text-center">${one.writedAt}</td>
 								<td class="text-center">${one.viewCount}</td>
 								<td class="text-center">${one.likes}</td>
-								<td class="text-center">${one.dislikes}</td>
+							
 
 							</tr>
 						</c:forEach>
@@ -70,7 +70,7 @@
 						</c:when>
 						<c:otherwise>
 							<a
-								href="${pageContext.servletContext.contextPath }/sports?p=${i}">${i }</a>
+								href="${pageContext.servletContext.contextPath }/list?p=${i}">${i }</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

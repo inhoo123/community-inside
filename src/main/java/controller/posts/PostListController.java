@@ -25,7 +25,8 @@ public class PostListController extends HttpServlet{
 			int count = postDao.countAll();
 			int totalPages = count/size + (count%size >0 ? 1: 0); 
 			
-			req.setAttribute("post", postDao.findAll());
+		
+			req.setAttribute("post", postDao.findAll2(start, end));
 			req.setAttribute("totalPages", totalPages);
 			req.setAttribute("currentPage",  p);
 			req.getRequestDispatcher("/WEB-INF/view/posts/list.jsp").forward(req, resp);

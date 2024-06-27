@@ -11,6 +11,7 @@ import java.util.List;
 import model.vo.Post;
 import oracle.jdbc.datasource.impl.OracleDataSource;
 
+
 public class PostDao {
 //=========================저장===========================================================================================
 	public boolean save(Post newPost) throws Exception {
@@ -202,5 +203,85 @@ public class PostDao {
 		}
 	}
 	
+	
+	
+	public boolean update(Post post) throws Exception {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+		try (Connection conn = ods.getConnection()) {
+			// 식별키로 조회하고,
+			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET TITLE=?, BODY=? WHERE NO=?");
+			stmt.setString(1, post.getTitle());
+			stmt.setString(2,post.getBody());
+			stmt.setInt(3,post.getNo());
+
+			int r = stmt.executeUpdate();
+
+			return r == 1 ? true : false;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+}
+	
+	public List<Post> findAll2(int start, int end) throws SQLException {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+		try (Connection conn = ods.getConnection()) {
+
+			PreparedStatement stmt = conn.prepareStatement(
+					"SELECT * FROM (SELECT ROWNUM RN, P.* FROM (SELECT * FROM POSTS ORDER BY WRITED_AT DESC) P) WHERE RN BETWEEN ? AND ?");
+			stmt.setInt(1, start);
+			stmt.setInt(2, end);
+
+			ResultSet rs = stmt.executeQuery();
+			List<Post> posts = new ArrayList<Post>();
+			while (rs.next()) {
+				Post one = new Post();
+
+				one.setNo(rs.getInt("no"));
+				one.setCategory(rs.getString("category"));
+				one.setTitle(rs.getString("title"));
+				one.setBody(rs.getString("body"));
+				one.setWriterId(rs.getString("writer_id"));
+				one.setWritedAt(rs.getDate("writed_At"));
+				one.setViewCount(rs.getInt("view_count"));
+				one.setLikes(rs.getInt("likes"));
+				one.setDislikes(rs.getInt("dislikes"));
+				posts.add(one);
+				
+			}
+
+			return posts;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+//	public boolean update(Post post) throws Exception {
+//		OracleDataSource ods = new OracleDataSource();
+//		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+//		ods.setUser("community_inside");
+//		ods.setPassword("oracle");
+//		try (Connection conn = ods.getConnection()) {
+//			// 식별키로 조회하고,
+//			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET TITLE=?, BODY=? WHERE NO=?");
+//			stmt.setString(1, post.getTitle());
+//			stmt.setString(2,post.getBody());
+//			stmt.setInt(3,post.getNo());
+//
+//			int r = stmt.executeUpdate();
+//
+//			return r == 1 ? true : false;
+//		} catch (Exception e) {
+//			System.out.println(e);
+//			return false;
+//		}
+//}
 
 }

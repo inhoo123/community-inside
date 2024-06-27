@@ -32,10 +32,9 @@ public class PostWriteHandleController extends HttpServlet {
 			boolean r = postDao.save(one);
 			
 			if (r) {
-				response.sendRedirect(request.getContextPath()+ "/login");
-			} else {
-				response.sendRedirect(request.getContextPath()+ "/write");
-			}
+				
+				response.sendRedirect(request.getContextPath()+ "/list");
+			} 
 				
 
 		} catch (Exception e) {

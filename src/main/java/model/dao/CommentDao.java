@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.vo.Comment;
+import model.vo.Post;
 import oracle.jdbc.datasource.impl.OracleDataSource;
 
 
@@ -65,6 +66,33 @@ public class CommentDao {
 		}
 	}//가나다순
 	
+	public Comment findByNo(int no) throws SQLException {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+
+		try (Connection conn = ods.getConnection()) {
+
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM COMMENTS WHERE NO=?");
+			stmt.setInt(1, no);
+
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+
+				return new Comment(rs.getInt("NO"),rs.getString("BODY"),rs.getDate("WRITED_AT"),rs.getInt("LIKES"),rs.getInt("DISLIKES")
+						,rs.getString("WRITER_ID"),rs.getString("PASSWORD"),rs.getInt("POST_NO"));
+			} else {
+				return null;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	
 
 	// ========================삭제================================================================================================
 
@@ -89,6 +117,27 @@ public class CommentDao {
 
 	}
 	// ======================================================================
+	
+	public boolean deleteByNo(int no) throws SQLException {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+
+		try (Connection conn = ods.getConnection()) {
+
+			PreparedStatement stmt = conn.prepareStatement("DELETE FROM COMMENTS WHERE NO=?");
+			stmt.setInt(1, no);
+
+			int r = stmt.executeUpdate();
+
+			return r == 1 ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
 	
 	
 	

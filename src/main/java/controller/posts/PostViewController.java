@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.CommentDao;
 import model.dao.PostDao;
+import model.dao.UserDao;
 import model.vo.Comment;
 import model.vo.Post;
 import model.vo.User;
@@ -20,11 +21,16 @@ public class PostViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
+			PostDao postDao = new PostDao();
+			UserDao userDao = new UserDao();
 
 			int no = Integer.parseInt(req.getParameter("no"));
-			PostDao postDao = new PostDao();
+			
 			Post post = postDao.findByNo(no);
+			
+			User writer = userDao.findById(post.getWriterId());
 			req.setAttribute("post", post);
+			req.setAttribute("writer", writer);
 			
 			CommentDao commentDao = new CommentDao();
 			List<Comment> comments   =  commentDao.findAllByPostNo(no);
