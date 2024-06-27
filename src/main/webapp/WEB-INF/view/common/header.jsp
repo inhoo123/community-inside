@@ -41,13 +41,25 @@
 
 	</div>
 </div>
-<!-- 네비게이션 -->
 <div class="gnb_bar">
 <div class="container px-1">
 <div style="text-align: left;">
 	<a href="${pageContext.servletContext.contextPath }/list"
-		><span style="color:white;  font-weight: 550;">갤러리</span></a>
+		><span style="color:white;  font-weight: 550;">&emsp;&emsp;운동</span></a>
+		
+		
+		<a href="${pageContext.servletContext.contextPath }/list"
+		><span style="color:white;  font-weight: 550;">&emsp;&emsp;유머</span></a>
+		
+		
+		<a href="${pageContext.servletContext.contextPath }/list"
+		><span style="color:white;  font-weight: 550;">&emsp;&emsp;축구</span></a>
+		
+		
+		<a href="${pageContext.servletContext.contextPath }/list"
+		><span style="color:white;  font-weight: 550;">&emsp;&emsp;자유글</span></a>
 		</div>
 		</div>
 </div>
+<!-- 네비게이션 -->
 
