@@ -16,6 +16,6 @@ public class LogoutController extends HttpServlet{
 			response.sendRedirect(request.getContextPath() + "/index");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/logout-decide.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 	}
