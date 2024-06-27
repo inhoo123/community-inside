@@ -21,11 +21,12 @@ public class CommentHandleController extends HttpServlet {
 			throws ServletException, IOException {
 		User authUser = (User) request.getSession().getAttribute("authUser");
 		try {
-
+            
 			String body = request.getParameter("body");
 			String password = request.getParameter("password");
 			int postNo = Integer.parseInt(request.getParameter("postNo"));
 			String writerId = authUser.getId();
+			
 			CommentDao commentDao = new CommentDao();
 			Comment one = new Comment();
 			one.setBody(body);
@@ -33,6 +34,7 @@ public class CommentHandleController extends HttpServlet {
 			one.setWriterId(writerId);
 			one.setPassword(password);
 			one.setPostNo(postNo);
+	
 			boolean r = commentDao.save(one);
 			List<Comment> comments = commentDao.findAllByPostNo(postNo);
             request.setAttribute("comments", comments);
