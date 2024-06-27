@@ -18,8 +18,17 @@ public class PostWriteHandleController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		User authUser = (User) request.getSession().getAttribute("authUser");
+		
 		try {
+			
+			User authUser = (User) request.getSession().getAttribute("authUser");
+
+			//로그인 안되있으면 로그인으로 보냄
+			if (authUser == null) {
+				response.sendRedirect(request.getContextPath() + "/login");
+				return;
+			}
+			
 			String category = request.getParameter("category");
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
@@ -32,9 +41,10 @@ public class PostWriteHandleController extends HttpServlet {
 			boolean r = postDao.save(one);
 			
 			if (r) {
-				
-				response.sendRedirect(request.getContextPath()+ "/list");
-			} 
+				response.sendRedirect(request.getContextPath()+"/list");
+			} else {
+				response.sendRedirect(request.getContextPath()+ "/write");
+			}
 				
 
 		} catch (Exception e) {

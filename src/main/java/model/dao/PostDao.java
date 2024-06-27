@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import model.vo.Post;
 import oracle.jdbc.datasource.impl.OracleDataSource;
-
 
 public class PostDao {
 //=========================저장===========================================================================================
@@ -65,7 +63,7 @@ public class PostDao {
 
 	}
 
-	// =========================================================
+	// =====================찾기===============================================================================================
 	public Post findByNo(int no) throws SQLException {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -129,7 +127,7 @@ public class PostDao {
 		ods.setPassword("oracle");
 		try (Connection conn = ods.getConnection()) {
 			// 식별키로 조회하고,
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=? ORDER BY CATEGORY");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=?");
 
 			stmt.setString(1, category);
 
@@ -180,7 +178,7 @@ public class PostDao {
 		}
 	}
 
-	
+//===============================게시글세기======================================================================================	
 	public int countAll() throws SQLException {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -202,9 +200,7 @@ public class PostDao {
 			return -1;
 		}
 	}
-	
-	
-	
+
 	public boolean update(Post post) throws Exception {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -214,8 +210,8 @@ public class PostDao {
 			// 식별키로 조회하고,
 			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET TITLE=?, BODY=? WHERE NO=?");
 			stmt.setString(1, post.getTitle());
-			stmt.setString(2,post.getBody());
-			stmt.setInt(3,post.getNo());
+			stmt.setString(2, post.getBody());
+			stmt.setInt(3, post.getNo());
 
 			int r = stmt.executeUpdate();
 
@@ -224,8 +220,8 @@ public class PostDao {
 			System.out.println(e);
 			return false;
 		}
-}
-	
+	}
+
 	public List<Post> findAll2(int start, int end) throws SQLException {
 		OracleDataSource ods = new OracleDataSource();
 		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
@@ -253,7 +249,7 @@ public class PostDao {
 				one.setLikes(rs.getInt("likes"));
 				one.setDislikes(rs.getInt("dislikes"));
 				posts.add(one);
-				
+
 			}
 
 			return posts;
@@ -262,26 +258,28 @@ public class PostDao {
 			return null;
 		}
 	}
-	
-//	public boolean update(Post post) throws Exception {
-//		OracleDataSource ods = new OracleDataSource();
-//		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
-//		ods.setUser("community_inside");
-//		ods.setPassword("oracle");
-//		try (Connection conn = ods.getConnection()) {
-//			// 식별키로 조회하고,
-//			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET TITLE=?, BODY=? WHERE NO=?");
-//			stmt.setString(1, post.getTitle());
-//			stmt.setString(2,post.getBody());
-//			stmt.setInt(3,post.getNo());
-//
-//			int r = stmt.executeUpdate();
-//
-//			return r == 1 ? true : false;
-//		} catch (Exception e) {
-//			System.out.println(e);
-//			return false;
-//		}
-//}
 
+//========================조회수======================================================================================================
+	public boolean increaseViewCountByNo(int no) throws SQLException {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+		try (Connection conn = ods.getConnection()) {
+			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET VIEW_COUNT = VIEW_COUNT + 1 WHERE no= ?");
+			stmt.setInt(1, no);
+
+			int r = stmt.executeUpdate();
+
+			return r == 1 ? true : false;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+//==================좋아요===========================================================================================================
+
+//=================좋아요 감소=============================================================================
 }

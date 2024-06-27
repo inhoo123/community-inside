@@ -16,6 +16,9 @@ public class PostListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
+			
+			
+			
 			int p = req.getParameter("p") == null ? 1 : Integer.parseInt(req.getParameter("p"));
 			int size = 10; // 페이지당 표시할 개수
 			int start = size * (p - 1) + 1;

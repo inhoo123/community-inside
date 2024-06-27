@@ -43,21 +43,24 @@
 </div>
 <div class="gnb_bar">
 <div class="container px-1">
-<div style="text-align: left;">
+<div style="text-align: center;">
 	<a href="${pageContext.servletContext.contextPath }/list"
+		><span style="color:white;  font-weight: 550;">모든글</span></a>
+	
+	<a href="${pageContext.servletContext.contextPath }/list/category?category=운동"
 		><span style="color:white;  font-weight: 550;">&emsp;&emsp;운동</span></a>
 		
 		
-		<a href="${pageContext.servletContext.contextPath }/list"
+		<a href="${pageContext.servletContext.contextPath }/list/category?category=유머"
 		><span style="color:white;  font-weight: 550;">&emsp;&emsp;유머</span></a>
 		
 		
-		<a href="${pageContext.servletContext.contextPath }/list"
+		<a href="${pageContext.servletContext.contextPath }/list/category?category=축구"
 		><span style="color:white;  font-weight: 550;">&emsp;&emsp;축구</span></a>
 		
 		
-		<a href="${pageContext.servletContext.contextPath }/list"
-		><span style="color:white;  font-weight: 550;">&emsp;&emsp;자유글</span></a>
+		<a href="${pageContext.servletContext.contextPath }/list/category?category=자유글"
+		><span  style="color:white;  font-weight: 550;">&emsp;&emsp;자유글</span></a>
 		</div>
 		</div>
 </div>
