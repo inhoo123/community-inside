@@ -13,7 +13,6 @@
 <body>
 
 	<%@ include file="/WEB-INF/view/common/header.jsp"%>
-	<div class="container px-1"></div>
 	<div class="container px-1">
 		<div style="text-align: center;">
 			<h2 style="color: #3b4890; font-weight: 700;">베스트</h2>
@@ -25,6 +24,7 @@
 				<thead>
 					<tr class="border-bottom">
 					<hr width = "100%" color = "#3b4890" size = "2">
+					<th style="width: 10%">분류</th>
 						<th style="width: 10%">번호</th>
 						<th>제목</th>
 						<th style="width: 10%">글쓴이</th>
@@ -38,6 +38,7 @@
 					<div>
 						<c:forEach items="${post}" var="one" >
 							<tr style="border-bottom: 1px solid #ddd; height: 30px;">
+								<td class="text-center">${one.category}</td>
 
 
 								<td><a

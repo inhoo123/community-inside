@@ -6,16 +6,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>게시글 작성</title>
+<link rel="stylesheet"
+	href="${pageContext.servletContext.contextPath }/css/style.css?<%=System.currentTimeMillis() %>" />
 </head>
 <body>
-	<div class="conatiner text-center" style="margin-top: 100px">
+
+<%@ include file="/WEB-INF/view/common/header.jsp"%>
+	<div class="container px-1">
 		<h1 style="font-weight: bold">게시글쓰기</h1>
 		<div>
 			<form
 				action="${pageContext.servletContext.contextPath }/write-handle" method="post">
 				<table style="border-collapse: collapse; width: 100%">
 					<tr style="border:1px solid #ccc; width: 100%">
-						<td ><select name="category"
+						<td style="width: 200px;"><select name="category"
 							class="p-3 fs-3 w-50 border-rounded">
 								<option value="운동">운동</option>
 								<option value="유머">유머</option>
@@ -40,7 +45,11 @@
 
 					</tr>
 				</table>
-				<button type="submit">보내기</button>
+				<br/>
+				<div style="text-align: right;">
+				<button type="submit" style="padding: 6px; background-color: #3b4890; color: white; cursor: pointer; width: 70px;">등록</button>
+				<button type="submit" style="padding: 8px; background-color: #ddd;  cursor: pointer; width: 70px; border:2px">취소</button>
+				</div>
 			</form>
 		</div>
 	</div>
