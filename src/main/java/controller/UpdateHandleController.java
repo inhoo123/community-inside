@@ -15,14 +15,13 @@ public class UpdateHandleController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			
+			PostDao postDao = new PostDao();
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
 		int no = Integer.parseInt(request.getParameter("no"));
 		// (int no, String writerId, String title, String body, Date writedAt, int readCnt) // 
-		Post one = new Post(no, null, title, body, null, null, 0, 0, 0);
+		Post one = new Post(0, null, title, body, null, null, 0, 0, 0);
 		
-		PostDao postDao = new PostDao();
 		
 		boolean r;
 			r = postDao.update(one);

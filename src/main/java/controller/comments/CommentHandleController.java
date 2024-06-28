@@ -19,27 +19,49 @@ public class CommentHandleController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		User authUser = (User) request.getSession().getAttribute("authUser");
 		try {
-			String body = request.getParameter("body");
-			String password = request.getParameter("password");
-			int postNo = Integer.parseInt(request.getParameter("postNo"));
-			String writerId = authUser.getId();
-			
-			CommentDao commentDao = new CommentDao();
-			Comment one = new Comment();
-			one.setBody(body);
-			one.setWritedAt(new Date(System.currentTimeMillis()));
-			one.setWriterId(writerId);
-			one.setPassword(password);
-			one.setPostNo(postNo);
-	
-			boolean r = commentDao.save(one);
-			List<Comment> comments = commentDao.findAllByPostNo(postNo);
-            request.setAttribute("comments", comments);
-			if (r) {
-				response.sendRedirect(request.getContextPath() + "/posts/view?no=" + postNo);
+			if (authUser != null) {
+				String authUserPassword = authUser.getPassword();
+				String body = request.getParameter("body");
+				int postNo = Integer.parseInt(request.getParameter("postNo"));
+				String writerId = authUser.getId();
+
+				CommentDao commentDao = new CommentDao();
+				Comment one = new Comment();
+				one.setBody(body);
+				one.setWritedAt(new Date(System.currentTimeMillis()));
+				one.setWriterId(writerId);
+				one.setPassword(authUserPassword);
+				one.setPostNo(postNo);
+
+				boolean r = commentDao.save(one);
+				List<Comment> comments = commentDao.findAllByPostNo(postNo);
+				request.setAttribute("comments", comments);
+				if (r) {
+					response.sendRedirect(request.getContextPath() + "/posts/view?no=" + postNo);
+				}
+			} else {
+				String writerId = request.getParameter("writerId");
+				String body = request.getParameter("body");
+				String password = request.getParameter("password");
+				int postNo = Integer.parseInt(request.getParameter("postNo"));
+
+				CommentDao commentDao = new CommentDao();
+				Comment one = new Comment();
+				one.setBody(body);
+				one.setWritedAt(new Date(System.currentTimeMillis()));
+				one.setWriterId(writerId);
+				one.setPassword(password);
+				one.setPostNo(postNo);
+
+				boolean r = commentDao.save(one);
+				List<Comment> comments = commentDao.findAllByPostNo(postNo);
+				request.setAttribute("comments", comments);
+				if (r) {
+					response.sendRedirect(request.getContextPath() + "/posts/view?no=" + postNo);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

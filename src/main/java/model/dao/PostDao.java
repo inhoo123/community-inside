@@ -127,7 +127,7 @@ public class PostDao {
 		ods.setPassword("oracle");
 		try (Connection conn = ods.getConnection()) {
 			// 식별키로 조회하고,
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=?");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM POSTS WHERE CATEGORY=? ORDER BY WRITED_AT DESC");
 
 			stmt.setString(1, category);
 
@@ -258,6 +258,43 @@ public class PostDao {
 			return null;
 		}
 	}
+	
+	public List<Post> findAll3(int start, int end) throws SQLException {
+		OracleDataSource ods = new OracleDataSource();
+		ods.setURL("jdbc:oracle:thin:@//3.36.66.249:1521/xe");
+		ods.setUser("community_inside");
+		ods.setPassword("oracle");
+		try (Connection conn = ods.getConnection()) {
+
+			PreparedStatement stmt = conn.prepareStatement(
+					"SELECT * FROM (SELECT ROWNUM RN, P.* FROM (SELECT * FROM POSTS ORDER BY VIEW_COUNT DESC) P) WHERE RN BETWEEN ? AND ?");
+			stmt.setInt(1, start);
+			stmt.setInt(2, end);
+
+			ResultSet rs = stmt.executeQuery();
+			List<Post> posts = new ArrayList<Post>();
+			while (rs.next()) {
+				Post one = new Post();
+
+				one.setNo(rs.getInt("no"));
+				one.setCategory(rs.getString("category"));
+				one.setTitle(rs.getString("title"));
+				one.setBody(rs.getString("body"));
+				one.setWriterId(rs.getString("writer_id"));
+				one.setWritedAt(rs.getDate("writed_At"));
+				one.setViewCount(rs.getInt("view_count"));
+				one.setLikes(rs.getInt("likes"));
+				one.setDislikes(rs.getInt("dislikes"));
+				posts.add(one);
+
+			}
+
+			return posts;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 //========================조회수======================================================================================================
 	public boolean increaseViewCountByNo(int no) throws SQLException {
@@ -266,7 +303,7 @@ public class PostDao {
 		ods.setUser("community_inside");
 		ods.setPassword("oracle");
 		try (Connection conn = ods.getConnection()) {
-			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET VIEW_COUNT = VIEW_COUNT + 1 WHERE no= ?");
+			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET VIEW_COUNT = VIEW_COUNT + 1 WHERE NO= ?");
 			stmt.setInt(1, no);
 
 			int r = stmt.executeUpdate();

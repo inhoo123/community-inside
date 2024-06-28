@@ -8,17 +8,16 @@
 	<div style="display: flex; justify-content: flex-end; gap: 2px;">
 		<c:choose>
 			<c:when test="${sessionScope.authUser == null }">
-				<div>
+				<div >
 					<a href="${pageContext.servletContext.contextPath }/login"
-						>로그인 <small>..</small></a>
+						><small style="padding: 5px; background-color: #3b4890; color: white; cursor: pointer; width: 50px;">로그인</small></a>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div>
-					<a href="${pageContext.servletContext.contextPath }/login"
-						> ${sessionScope.authUser.name }님 </a> <a
-						href="${pageContext.servletContext.contextPath }/login"
-						> 로그아웃</a>
+				<div>	
+						<small>${sessionScope.authUser.name }님</small>  <a
+						href="${pageContext.servletContext.contextPath }/logout"
+						> <small style="padding: 5px; background-color: #3b4890; color: white; cursor: pointer; width: 50px;">로그아웃</small></a>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -34,7 +33,7 @@
 		<div >
 					<form action="${pageContext.servletContext.contextPath }/search/view">
 						<input class="search" type="text" placeholder="갤러리 & 통합검색" name="q"
-							style="width: 300px;" value="${param.q }" />
+							style="width: 300px; height:45px;" value="${param.q }" />
 					</form>
 		</div>
 
@@ -43,7 +42,7 @@
 </div>
 <div class="gnb_bar">
 <div class="container px-1">
-<div style="text-align: center;">
+<div style="text-align: left; margin-left: 80px;">
 	<a href="${pageContext.servletContext.contextPath }/list"
 		><span style="color:white;  font-weight: 550;">모든글</span></a>
 	
