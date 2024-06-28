@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>error</title>
 </head>
 <body>
+		<h2 style="text-align: center;">error</h2>
+		<p>에러가 발생하였습니다.</p>
 
 </body>
 </html>

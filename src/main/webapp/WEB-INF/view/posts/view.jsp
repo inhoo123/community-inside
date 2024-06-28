@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,9 +65,22 @@
 				<c:forEach items="${comments }" var="one">
 					<div
 						style="border-top: 1px solid #eee; border-bottom: 1px solid #eee; display: flex; padding: 4px 0px;">
-						<div style="flex:2; color: #777">${one.writerId}</div>
-						<div style="flex:8">${one.body }</div>
-						<div style="flex:2;  color: #999; font-size: small; text-align: right;"><fmt:formatDate value="${one.writedAt }" pattern="MM.dd HH:mm:ss"/> </div>
+						<div style="flex: 2; color: #777">${one.writerId}</div>
+						<div style="flex: 8">${one.body }</div>
+						<div
+							style="flex: 2; color: #999; font-size: small; text-align: right;">
+							<fmt:formatDate value="${one.writedAt }" pattern="MM.dd HH:mm:ss" />
+						</div>
+						<c:choose>
+							<c:when
+								test="${post.writerId != null &&	post.writerId eq sessionScope.authUser.id }">
+								<a
+									href="${pageContext.servletContext.contextPath}/commentdelete-handle?no=${one.no}"
+									class="no-deco-link">
+									<button>삭제</button>
+								</a>
+							</c:when>
+						</c:choose>
 					</div>
 				</c:forEach>
 			</div>
@@ -78,16 +91,23 @@
 					<input type="hidden" name="postNo" value="${post.no }" />
 					<div style="display: flex; gap: 10px;">
 						<div>
-						<c:choose>
-						<c:when test="${authUser == null }">
-							<input name="password" type="password"
-								style="padding: 6px 10px; width: 100px; border: 1px solid #ccc"
-								placeholder="비밀번호" required />
+							<c:choose>
+								<c:when test="${authUser == null }">
+									<div style="margin-bottom: 4px;">
+									<input name="writerId" type="text"
+										style="padding: 6px 10px; width: 100px; border: 1px solid #ccc"
+										placeholder="닉네임" required />
+									</div>
+									<div >
+									<input name="password" type="password"
+										style="padding: 6px 10px; width: 100px; border: 1px solid #ccc"
+										placeholder="비밀번호" required />
+									</div>
 								</c:when>
 								<c:otherwise>
 								${post.writerId}
 								</c:otherwise>
-								</c:choose>
+							</c:choose>
 						</div>
 						<div style="flex: 1">
 							<textarea
@@ -98,7 +118,7 @@
 					<div style="text-align: right">
 
 						<button type="submit"
-							style="padding: 8px; background-color: #3b4890; color: white; cursor: pointer; width: 100px;">보내기</button>
+							style="padding: 6px; background-color: #3b4890; color: white; cursor: pointer; width: 70px;">등록</button>
 					</div>
 				</form>
 			</div>

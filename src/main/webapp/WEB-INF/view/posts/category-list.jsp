@@ -16,12 +16,12 @@
 	<div class="container px-1"></div>
 	<div class="container px-1">
 		<div style="text-align: center;">
-			<h2>${category}갤러리</h2>
+			<h2  style="color: #3b4890; font-weight: 700;">${category}갤러리</h2>
 			<div style="margin-top: 10px; text-align: right;">
 
 				<a href="${pageContext.servletContext.contextPath }/write">
 
-					<button>글쓰기</button>
+					<button style="padding: 5px; background-color: #3b4890; color: white; cursor: pointer; width: 60px;">글쓰기</button>
 				</a>
 
 			</div>
@@ -54,7 +54,6 @@
 								<td class="text-center">${one.writedAt}</td>
 								<td class="text-center">${one.viewCount}</td>
 								<td class="text-center">${one.likes}</td>
-								<td class="text-center">${one.dislikes}</td>
 
 							</tr>
 						</c:forEach>

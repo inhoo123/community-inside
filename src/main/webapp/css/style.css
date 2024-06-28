@@ -14,6 +14,15 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: lighter;
 }
 
+.gnb_bar2 {
+    position: relative;
+    min-width: 1050px;
+    background-color: #3b4890;
+    border: 1px solid #3b4890;
+    border-width: 1px 0 1px 0;
+    padding: 10px;
+}
+
 .top{
 	padding-top:100px;
 	
@@ -402,8 +411,19 @@ body {
 	width: 100%;
 	box-sizing: border-box;
 	font-size: 1.25rem;
-	border-radius: 20px;
+	
 }
+
+.login-input2 {
+	padding: 16px;
+	border: 1px solid #ddd;
+	background-color: #3b4890; 
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 1.25rem;
+	color:white;
+}
+
 
 /* table css ======================================== */
 .default-table {
