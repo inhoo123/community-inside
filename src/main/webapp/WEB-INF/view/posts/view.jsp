@@ -39,7 +39,7 @@
 			</div>
 			<div style="text-align: left;">
 				<a href="${pageContext.servletContext.contextPath}/list"
-					class="no-deco-link"><button>목록</button></a>
+					class="no-deco-link"><button style="padding: 6px; background-color: #3b4890; color: white; cursor: pointer; width: 70px;">목록</button></a>
 			</div>
 			<p></p>
 			<div style="text-align: right;">
@@ -50,14 +50,14 @@
 						<a
 							href="${pageContext.servletContext.contextPath}/delete-handle?no=${post.no}"
 							class="no-deco-link">
-							<button>삭제</button>
+							<button style="padding: 5px; background-color: #ddd;  cursor: pointer; width: 60px; border:1px">삭제</button>
 						</a>
 
 						<a
 							href="${pageContext.servletContext.contextPath}/update?no=${post.no}"
 
 							class="no-deco-link">
-							<button>수정</button>
+							<button style="padding: 5px; background-color: #ddd;  cursor: pointer; width: 60px; border:1px">수정</button>
 						</a>
 					</c:when>
 				</c:choose>
@@ -68,7 +68,7 @@
 
 				<c:forEach items="${comments }" var="one">
 					<div
-						style="border-top: 1px solid #eee; border-bottom: 1px solid #eee; display: flex; padding: 4px 0px;">
+						style="border-top: 1px solid #eee; border-bottom: 1px solid #eee; display: flex; padding: 4px 0px; align-items: center">
 						<div style="flex: 2; color: #777">${one.writerId}</div>
 						<div style="flex: 8">${one.body }</div>
 						<div
@@ -77,13 +77,19 @@
 						</div>
 						<c:choose>
 							<c:when
-								test="${post.writerId != null &&	post.writerId eq sessionScope.authUser.id }">
-								<a
+								test="${post.writerId != null &&	one.writerId eq sessionScope.authUser.id }">
+								<div>
+								<a 
 									href="${pageContext.servletContext.contextPath}/commentdelete-handle?no=${one.no}"
 									class="no-deco-link">
-									<button>삭제</button>
+									<button style="padding: 3px; background-color: #ddd;  cursor: pointer; width: 40px; border:1px">삭제</button>
 								</a>
+								</div>
 							</c:when>
+							<c:otherwise>
+								<div>
+								</div>
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</c:forEach>
