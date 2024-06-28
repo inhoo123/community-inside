@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${category}갤러리</title>
+<title>community-inside</title>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/style.css?<%=System.currentTimeMillis() %>" />
 </head>
@@ -29,6 +29,7 @@
 				<thead>
 					<tr class="border-bottom">
 					<hr width = "100%" color = "#3b4890" size = "2">
+						<th style="width: 10%">분류</th>
 						<th style="width: 10%">번호</th>
 						<th>제목</th>
 						<th style="width: 10%">글쓴이</th>
@@ -43,7 +44,7 @@
 						<c:forEach items="${post}" var="one" >
 							<tr style="border-bottom: 1px solid #ddd; height: 30px;">
 
-
+								<td class="text-center">${one.category}</td>
 								<td><a
 									href="${pageContext.servletContext.contextPath }/posts/view?no=${one.no}"
 									class="no-deco-link">${one.no } </a></td>

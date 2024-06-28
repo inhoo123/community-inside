@@ -52,7 +52,10 @@
 							class="no-deco-link">
 							<button>삭제</button>
 						</a>
-						<a href="${pageContext.servletContext.contextPath}/update"
+
+						<a
+							href="${pageContext.servletContext.contextPath}/update?no=${post.no}"
+
 							class="no-deco-link">
 							<button>수정</button>
 						</a>
@@ -62,6 +65,7 @@
 			<p>전체 댓글</p>
 			<hr width="100%" color="#3b4890" size="3">
 			<div>
+
 				<c:forEach items="${comments }" var="one">
 					<div
 						style="border-top: 1px solid #eee; border-bottom: 1px solid #eee; display: flex; padding: 4px 0px;">
@@ -120,6 +124,7 @@
 						<button type="submit"
 							style="padding: 6px; background-color: #3b4890; color: white; cursor: pointer; width: 70px;">등록</button>
 					</div>
+
 				</form>
 			</div>
 		</div>

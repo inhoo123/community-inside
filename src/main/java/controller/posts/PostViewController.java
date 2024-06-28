@@ -33,20 +33,15 @@ public class PostViewController extends HttpServlet {
 			
 			Post post = postDao.findByNo(no);
 			
+			
 			User writer = userDao.findById(post.getWriterId());
 			req.setAttribute("post", post);
 			req.setAttribute("writer", writer);
 			
-
-//오늘할거
-//			LikeDao likeDao = new LikeDao();
-//			List<Like> likes = likeDao.increaseLikeCountByNo(no);
-//			if(!likes.contains(no)) {
-//				return;
-//			}
-//			User authUser = (User) req.getSession().getAttribute("authUser");
-//			List<String> userIds = new ArrayList<>();
-
+			
+		
+			List<String> userIds = new ArrayList<>();
+			
 			// 조회수
 			boolean f = postDao.increaseViewCountByNo(no);
 
@@ -54,6 +49,7 @@ public class PostViewController extends HttpServlet {
 			// 댓글
 			CommentDao commentDao = new CommentDao();
 			List<Comment> comments = commentDao.findAllByPostNo(no);
+			req.setAttribute("comment", commentDao.findByNo(no));
 			req.setAttribute("comments", comments);
 
 			req.getRequestDispatcher("/WEB-INF/view/posts/view.jsp").forward(req, resp);

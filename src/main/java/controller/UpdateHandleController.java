@@ -26,7 +26,7 @@ public class UpdateHandleController extends HttpServlet{
 		boolean r;
 			r = postDao.update(one);
 		if (r) {
-			response.sendRedirect(request.getContextPath()+"/list");	
+			response.sendRedirect(request.getContextPath()+"/posts/view?no="+no);	
 		} else {
 			
 	}
