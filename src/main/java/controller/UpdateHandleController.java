@@ -15,6 +15,7 @@ public class UpdateHandleController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -26,7 +27,7 @@ public class UpdateHandleController extends HttpServlet{
 		boolean r;
 			r = postDao.update(one);
 		if (r) {
-			response.sendRedirect(request.getContextPath()+"/view?no="+no);	
+			response.sendRedirect(request.getContextPath()+"/posts/view?no="+no);	
 		} else {
 			
 	}

@@ -42,49 +42,64 @@
 					class="no-deco-link"><button>목록</button></a>
 			</div>
 			<p></p>
-		<div style="text-align: right;">
+			<div style="text-align: right;">
 
-			<c:choose>
-				<c:when
-					test="${post.writerId != null &&	post.writerId eq sessionScope.authUser.id }">
-					<a
-						href="${pageContext.servletContext.contextPath}/delete-handle?no=${post.no}"
-						class="no-deco-link">
-						<button>삭제</button>
-					</a>
-					<a
-						href="${pageContext.servletContext.contextPath}/update"
-						class="no-deco-link">
-						<button>수정</button>
-					</a>
-				</c:when>
-			</c:choose>
-		</div>
-		<p>전체 댓글</p>
-		<hr width="100%" color="#3b4890" size="3">
-		<div>
-			<c:forEach items="${comments }" var="one">
+				<c:choose>
+					<c:when
+						test="${post.writerId != null &&	post.writerId eq sessionScope.authUser.id }">
+						<a
+							href="${pageContext.servletContext.contextPath}/delete-handle?no=${post.no}"
+							class="no-deco-link">
+							<button>삭제</button>
+						</a>
+						<a
+							href="${pageContext.servletContext.contextPath}/update?no=${post.no}"
+							class="no-deco-link">
+							<button>수정</button>
+						</a>
+					</c:when>
+				</c:choose>
+			</div>
+			<p>전체 댓글</p>
+			<hr width="100%" color="#3b4890" size="3">
+			<div>
+
+				<c:forEach items="${comments }" var="one">
 				(${one.writerId})${one.body }
-			</c:forEach>
-		</div>
-		<div class="comment-section">
-			<form
-				action="${pageContext.servletContext.contextPath}/submit-comment?postNo=${post.no}"
-				method="post">
-				<input type="hidden" name="postNo" value="${post.no }"/>
-				<p style="border: 1px solid #ccc; padding: 12px;">
-					<input name="password" type="password"
-						style="padding: 6px 10px; width: 100px; border: 1px solid #ccc"
-						placeholder="비밀번호" required />
-				</p>
-				<textarea style="padding: 6px 10px; height: 200px; width: 300px;"
-					name="body"  placeholder="내용을 입력하세요" required></textarea>
+				<c:choose>
+					<c:when
+						test="${post.writerId != null &&	post.writerId eq sessionScope.authUser.id }">
+						<form
+							action="${pageContext.servletContext.contextPath}/comment-update"
+							method="POST">
+							<input type="hidden" name="postNo" value="${post.no}"> 
+							<input type="hidden" name="no" value="${one.no}">
+							<button type="submit">수정</button>
+						</form>
+					</c:when>
+				</c:choose>
+			    </c:forEach>
 
-				<button type="submit">보내기</button>
-			</form>
+
+			</div>
+			<div class="comment-section">
+				<form
+					action="${pageContext.servletContext.contextPath}/submit-comment?postNo=${post.no}"
+					method="post">
+					<input type="hidden" name="postNo" value="${post.no }" />
+					<p style="border: 1px solid #ccc; padding: 12px;">
+						<input name="password" type="password"
+							style="padding: 6px 10px; width: 100px; border: 1px solid #ccc"
+							placeholder="비밀번호" required />
+					</p>
+					<textarea style="padding: 6px 10px; height: 200px; width: 300px;"
+						name="body" placeholder="내용을 입력하세요" required></textarea>
+
+					<button type="submit">보내기</button>
+				</form>
+			</div>
 		</div>
 	</div>
-		</div>
 
 </body>
 </html>
