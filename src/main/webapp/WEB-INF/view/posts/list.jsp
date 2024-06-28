@@ -13,7 +13,7 @@
 <body>
 
 	<%@ include file="/WEB-INF/view/common/header.jsp"%>
-	<div class="container px-1"></div>
+	
 	<div class="container px-1">
 		<div style="text-align: center;">
 			<h2 style="color: #3b4890; font-weight: 700;">${category}갤러리</h2>

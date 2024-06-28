@@ -208,7 +208,7 @@ public class PostDao {
 		ods.setPassword("oracle");
 		try (Connection conn = ods.getConnection()) {
 			// 식별키로 조회하고,
-			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET TITLE=?, BODY=? WHERE NO=?");
+			PreparedStatement stmt = conn.prepareStatement("UPDATE POSTS SET TITLE=?,BODY=?, WHERE NO=?");
 			stmt.setString(1, post.getTitle());
 			stmt.setString(2, post.getBody());
 			stmt.setInt(3, post.getNo());
